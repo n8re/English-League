@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>الدوري الانجليزي</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-content">
+        <div>
+          <p class="eyebrow">بطولة علاوي عمارة</p>
+          <h1>بطولة الدوري الانجليزي</h1>
+          <p class="header-desc">20 فريق • 4 مجموعات • طريق واحد نحو اللقب</p>
+        </div>
+
+        <button id="themeToggle" class="theme-toggle-btn" type="button">
+  <span id="themeIcon">🌙</span>
+  <span id="themeText">داكن</span>
+</button>
+
+        <div class="trophy-card">
+          <large>N8RE</large>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="tabs">
+      <button class="tab-btn active" data-section="home">الرئيسية</button>
+      <button class="tab-btn" data-section="groups">المجموعات</button>
+      <button class="tab-btn" data-section="matches">المباريات</button>
+      <button class="tab-btn" data-section="bracket">المخطط</button>
+      <button class="tab-btn" data-section="stats">الإحصائيات</button>
+      <button class="tab-btn" data-section="teams">الفرق</button>
+<button class="tab-btn" data-section="players">اللاعبين</button>
+    </nav>
+
+    <!-- Main -->
+    <main>
+
+        <!-- Home -->
+<section id="home" class="section active-section">
+
+  <div class="home-hero-pro">
+    <div class="home-hero-content">
+      <p class="home-kicker">Tournament Dashboard</p>
+      <h2>بطولة الدوري الانجليزي</h2>
+      <p>
+
+      <div class="home-hero-actions">
+        <button class="home-primary-btn" data-section-jump="bracket">عرض المخطط</button>
+        <button class="home-secondary-btn" data-section-jump="matches">المباريات</button>
+      </div>
+    </div>
+
+    <div class="home-trophy-box">
+      <div class="home-trophy-icon">🏆</div>
+      <span>Road to Final</span>
+      <strong>Quarter → Semi → Final</strong>
+    </div>
+  </div>
+
+  <div class="home-stats-strip">
+    <div class="home-stat-pill">
+      <strong id="homeTeamsCount">0</strong>
+      <span>فريق</span>
+    </div>
+
+    <div class="home-stat-pill">
+      <strong>4</strong>
+      <span>مجموعات</span>
+    </div>
+
+    <div class="home-stat-pill">
+      <strong id="homeMatchesCount">0</strong>
+      <span>مباراة</span>
+    </div>
+
+    <div class="home-stat-pill">
+      <strong>8</strong>
+      <span>متأهلين</span>
+    </div>
+  </div>
+
+  <div class="home-main-grid">
+
+    <div class="home-feature-card">
+      <div class="home-card-title">
+        <div>
+          <p class="section-label">Featured Match</p>
+          <h3>المباراة الأبرز</h3>
+        </div>
+        <button class="mini-btn" data-section-jump="matches">الكل</button>
+      </div>
+
+      <div id="homeFeaturedMatch"></div>
+    </div>
+
+    <div class="home-side-stack">
+
+      <div class="home-mini-panel">
+        <div class="home-panel-head">
+          <h3>آخر نتيجة</h3>
+          <span>Finished</span>
+        </div>
+        <div id="homeLatestResult"></div>
+      </div>
+
+      <div class="home-mini-panel">
+        <div class="home-panel-head">
+          <h3>أقرب مباراة</h3>
+          <span>Next</span>
+        </div>
+        <div id="homeNextMatch"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="home-lower-grid">
+
+    <div class="home-board-card">
+      <div class="home-card-title">
+        <div>
+          <p class="section-label">Qualification</p>
+          <h3>المتأهلون حاليًا</h3>
+        </div>
+        <button class="mini-btn" data-section-jump="groups">المجموعات</button>
+      </div>
+
+      <div id="homeQualifiedTeams" class="home-qualified-list"></div>
+    </div>
+
+    <div class="home-board-card">
+      <div class="home-card-title">
+        <div>
+          <p class="section-label">Top Scorers</p>
+          <h3>أفضل الهدافين</h3>
+        </div>
+        <button class="mini-btn" data-section-jump="stats">الإحصائيات</button>
+      </div>
+
+      <div id="homeTopScorers" class="home-scorers-list"></div>
+    </div>
+
+  </div>
+
+  <div class="home-bracket-banner">
+    <div>
+      <p class="section-label">Knockout Stage</p>
+      <h3>مخطط البطولة جاهز تلقائيًا</h3>
+      <p>بعد اكتمال دور المجموعات، يتم توليد ربع النهائي تلقائيًا حسب المتأهلين.</p>
+    </div>
+
+    <button class="home-primary-btn" data-section-jump="bracket">افتح المخطط</button>
+  </div>
+
+</section>
+
+      <!-- Groups -->
+      <section id="groups" class="section">
+        <div class="section-title">
+          <p class="section-label">Group Stage</p>
+          <h2>ترتيب المجموعات</h2>
+          <p>كل مجموعة إلها ترتيب خاص، ويتم الحساب تلقائيًا من نتائج المباريات المنتهية.</p>
+        </div>
+
+        <div id="groupsContainer" class="groups-container"></div>
+      </section>
+
+      <!-- Matches -->
+      <section id="matches" class="section">
+        <div class="section-title">
+          <p class="section-label">Fixtures & Results</p>
+          <h2>المباريات والنتائج</h2>
+          <p>كل مباراة تعرض الفريقين، المجموعة أو المرحلة، الحالة، والنتيجة.</p>
+        </div>
+
+        <div class="filter-row">
+          <button class="filter-btn active" data-filter="all">الكل</button>
+          <button class="filter-btn" data-filter="upcoming">القادمة</button>
+          <button class="filter-btn" data-filter="today">اليوم</button>
+          <button class="filter-btn" data-filter="finished">النتائج</button>
+        </div>
+
+        <div id="matchesContainer" class="matches-list"></div>
+      </section>
+
+      <!-- Bracket -->
+      <section id="bracket" class="section">
+        <div class="section-title">
+          <p class="section-label">Knockout Stage</p>
+          <h2>مخطط البطولة</h2>
+          <p>يتولد ربع النهائي تلقائيًا من أوائل وثواني المجموعات.</p>
+        </div>
+
+        <div id="bracketContainer" class="bracket-wrap"></div>
+      </section>
+
+      <!-- Stats -->
+<section id="stats" class="section">
+  <div class="section-title">
+    <p class="section-label">Statistics</p>
+    <h2>إحصائيات البطولة</h2>
+    <p>ترتيب الهدافين، أفضل لاعب، والبطاقات يتم حسابهم تلقائيًا من نتائج وأحداث المباريات.</p>
+  </div>
+
+  <div id="statsHighlights" class="stats-highlights"></div>
+
+  <div class="stats-board">
+    <div class="stats-board-header">
+      <div>
+        <p class="section-label">Leaderboard</p>
+        <h3>ترتيب اللاعبين</h3>
+      </div>
+    </div>
+
+    <div class="stats-tabs">
+      <button class="stats-tab active" data-stats-tab="scorers">الهدافين</button>
+      <button class="stats-tab" data-stats-tab="motm">الأفضل</button>
+      <button class="stats-tab" data-stats-tab="yellow">الصفراء</button>
+      <button class="stats-tab" data-stats-tab="red">الحمراء</button>
+    </div>
+
+    <div id="statsTabContent" class="stats-tab-content"></div>
+  </div>
+</section>
+
+      <!-- Teams -->
+<section id="teams" class="section">
+  <div class="section-title">
+    <p class="section-label">Teams</p>
+    <h2>الفرق</h2>
+    <p>الفرق مرتبة حسب المجموعات، اضغط على أي فريق لعرض اللاعبين والإحصائيات والمباريات.</p>
+  </div>
+
+  <div id="teamsContainer" class="teams-groups-list"></div>
+</section>
+
+<!-- Players -->
+<section id="players" class="section">
+  <div class="section-title">
+    <p class="section-label">Players</p>
+    <h2>اللاعبين</h2>
+    <p>ابحث، فلتر، ورتّب اللاعبين حسب الإحصائيات، واضغط على أي لاعب لعرض التفاصيل.</p>
+  </div>
+
+  <div class="players-control-panel">
+    <div class="players-search-box">
+      <label for="playerSearch">بحث عن لاعب</label>
+      <input id="playerSearch" type="text" placeholder="اكتب اسم اللاعب..." />
+    </div>
+
+    <div class="players-select-box">
+      <label for="teamFilter">الفريق</label>
+      <select id="teamFilter">
+        <option value="all">كل الفرق</option>
+      </select>
+    </div>
+
+    <div class="players-select-box">
+      <label for="playerSort">الترتيب</label>
+      <select id="playerSort">
+        <option value="default">الترتيب الافتراضي</option>
+        <option value="goals">الأعلى أهداف</option>
+        <option value="cards">الأكثر بطاقات</option>
+        <option value="motm">الأكثر أفضل لاعب</option>
+        <option value="name">حسب الاسم</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="playersContainer" class="players-modern-grid"></div>
+</section>
+
+    </main>
+
+  </div>
+
+<!-- Match Details Popup -->
+<div id="matchModal" class="match-modal">
+  <div class="modal-backdrop" onclick="closeMatchModal()"></div>
+
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeMatchModal()">×</button>
+
+    <div id="matchModalContent"></div>
+  </div>
+</div>
+
+<!-- Team Details Popup -->
+<div id="teamModal" class="match-modal">
+  <div class="modal-backdrop" onclick="closeTeamModal()"></div>
+
+  <div class="modal-card team-modal-card">
+    <button class="modal-close" onclick="closeTeamModal()">×</button>
+
+    <div id="teamModalContent"></div>
+  </div>
+</div>
+
+<!-- Player Details Popup -->
+<div id="playerModal" class="match-modal">
+  <div class="modal-backdrop" onclick="closePlayerModal()"></div>
+
+  <div class="modal-card player-modal-card">
+    <button class="modal-close" onclick="closePlayerModal()">×</button>
+
+    <div id="playerModalContent"></div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const sections = document.querySelectorAll(".section");
+
+    tabButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const target = button.dataset.section;
+        const targetSection = document.getElementById(target);
+
+        if (!targetSection) return;
+
+        tabButtons.forEach(function (btn) {
+          btn.classList.remove("active");
+        });
+
+        sections.forEach(function (section) {
+          section.classList.remove("active-section");
+        });
+
+        button.classList.add("active");
+        targetSection.classList.add("active-section");
+      });
+    });
+
+    document.querySelectorAll("[data-section-jump]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        const target = button.dataset.sectionJump;
+        const tab = document.querySelector('.tab-btn[data-section="' + target + '"]');
+
+        if (tab) {
+          tab.click();
+        }
+      });
+    });
+  });
+</script>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>

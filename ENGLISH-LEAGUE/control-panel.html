@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>لوحة إدارة الدوري الانجليزي</title>
+
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <div class="admin-app">
+
+    <!-- Login Screen -->
+    <section id="loginScreen" class="login-screen">
+      <div class="login-card">
+        <div class="login-badge">⚽</div>
+
+        <p class="admin-kicker">Control Panel</p>
+        <h1>لوحة إدارة الدوري الانجليزي</h1>
+        <p class="login-desc">تسجيل الدخول لإدارة الفرق، اللاعبين، المباريات، النتائج، والتشكيلات.</p>
+
+        <form id="loginForm" class="login-form">
+          <div class="form-group">
+            <label for="adminEmail">البريد الإلكتروني</label>
+            <input id="adminEmail" type="email" placeholder="admin@email.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="adminPassword">كلمة المرور</label>
+
+            <div class="password-field">
+              <input id="adminPassword" type="password" placeholder="••••••••" required />
+              <button id="togglePassword" type="button">إظهار</button>
+            </div>
+          </div>
+
+          <button type="submit" class="admin-primary-btn">دخول لوحة الإدارة</button>
+
+          <p id="loginMessage" class="login-message"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="dashboardScreen" class="dashboard-screen hidden">
+
+      <!-- Sidebar -->
+      <aside class="admin-sidebar">
+        <div class="admin-brand">
+          <div class="brand-icon">🏆</div>
+          <div>
+            <h2>الدوري الانجليزي</h2>
+            <span>لوحة الإدارة</span>
+          </div>
+        </div>
+
+        <nav class="admin-nav">
+          <button class="admin-nav-btn active" data-admin-section="overview">الرئيسية</button>
+          <button class="admin-nav-btn" data-admin-section="teams">الفرق</button>
+          <button class="admin-nav-btn" data-admin-section="players">اللاعبين</button>
+          <button class="admin-nav-btn" data-admin-section="matches">المباريات</button>
+          <button class="admin-nav-btn" data-admin-section="results">النتائج والأحداث</button>
+          <button class="admin-nav-btn" data-admin-section="lineups">التشكيلات</button>
+        </nav>
+
+        <button id="logoutBtn" class="logout-btn">تسجيل خروج</button>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="admin-main">
+
+        <header class="admin-topbar">
+          <div>
+            <p class="admin-kicker">Dashboard</p>
+            <h1 id="adminPageTitle">الرئيسية</h1>
+          </div>
+
+          <div class="admin-user-pill">
+            <span>Admin</span>
+            <strong id="adminUserEmail">admin@email.com</strong>
+          </div>
+        </header>
+
+        <!-- Overview -->
+        <section id="overview" class="admin-section active-admin-section">
+          <div class="admin-stats-grid">
+            <div class="admin-stat-card">
+              <span>الفرق</span>
+              <strong>20</strong>
+            </div>
+
+            <div class="admin-stat-card">
+              <span>المجموعات</span>
+              <strong>4</strong>
+            </div>
+
+            <div class="admin-stat-card">
+              <span>المتأهلين</span>
+              <strong>8</strong>
+            </div>
+
+            <div class="admin-stat-card">
+              <span>الحالة</span>
+              <strong>نشطة</strong>
+            </div>
+          </div>
+
+          <div class="quick-actions-grid">
+            <button class="quick-action-card" data-jump-admin="teams">
+              <span>👕</span>
+              <strong>إضافة فريق</strong>
+              <small>إدارة فرق البطولة</small>
+            </button>
+
+            <button class="quick-action-card" data-jump-admin="players">
+              <span>🏃</span>
+              <strong>إضافة لاعب</strong>
+              <small>ربط اللاعب بفريق</small>
+            </button>
+
+            <button class="quick-action-card" data-jump-admin="matches">
+              <span>📅</span>
+              <strong>إضافة مباراة</strong>
+              <small>تاريخ، وقت، ملعب</small>
+            </button>
+
+            <button class="quick-action-card" data-jump-admin="results">
+              <span>⚽</span>
+              <strong>إضافة نتيجة</strong>
+              <small>أهداف وبطاقات وأفضل لاعب</small>
+            </button>
+
+            <button class="quick-action-card" data-jump-admin="lineups">
+              <span>📋</span>
+              <strong>إضافة تشكيلة</strong>
+              <small>8 أساسيين + احتياط تلقائي</small>
+            </button>
+          </div>
+
+          <div class="admin-panel">
+            <div class="panel-title">
+              <h2>ملاحظات الإدارة</h2>
+              <span>Stable V1</span>
+            </div>
+
+            <p class="admin-note">
+              لوحة الإدارة مرتبطة بتسجيل دخول Firebase، والأقسام التالية جاهزة للربط مع Firestore.
+            </p>
+          </div>
+        </section>
+
+        <!-- Teams -->
+        <section id="teams" class="admin-section">
+          <div class="admin-panel">
+            <div class="panel-title">
+              <h2>إدارة الفرق</h2>
+              <span>Teams</span>
+            </div>
+
+            <form id="teamForm" class="admin-form">
+              <input id="teamIdInput" type="hidden" />
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>اسم الفريق</label>
+                  <input id="teamNameInput" type="text" placeholder="Arsenal" required />
+                </div>
+
+                <div class="form-group">
+                  <label>المجموعة</label>
+                  <select id="teamGroupInput" required>
+                    <option value="A">Group A</option>
+                    <option value="B">Group B</option>
+                    <option value="C">Group C</option>
+                    <option value="D">Group D</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>اسم المدرب</label>
+                  <input id="teamCoachInput" type="text" placeholder="اسم المدرب" />
+                </div>
+              </div>
+
+              <div class="admin-form-actions">
+                <button id="saveTeamBtn" type="submit" class="admin-primary-btn">حفظ الفريق</button>
+                <button id="cancelTeamEditBtn" type="button" class="admin-secondary-btn hidden">إلغاء التعديل</button>
+              </div>
+
+              <p id="teamFormMessage" class="form-message"></p>
+            </form>
+
+            <div class="admin-list-preview">
+              <div class="list-preview-head">
+                <h3>الفرق المضافة</h3>
+                <span id="teamsCountBadge">0 فريق</span>
+              </div>
+
+              <div id="teamsAdminList" class="admin-data-list">
+                <div class="preview-row">
+                  <strong>جاري تحميل الفرق...</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Players -->
+        <section id="players" class="admin-section">
+          <div class="admin-panel">
+            <div class="panel-title">
+              <h2>إدارة اللاعبين</h2>
+              <span>Players</span>
+            </div>
+
+            <form id="playerForm" class="admin-form">
+              <input id="playerIdInput" type="hidden" />
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>اختيار الفريق</label>
+                  <select id="playerTeamInput" required>
+                    <option value="">جاري تحميل الفرق...</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>اسم اللاعب</label>
+                  <input id="playerNameInput" type="text" placeholder="اسم اللاعب" required />
+                </div>
+
+                <div class="form-group">
+                  <label>المركز</label>
+                  <select id="playerPositionInput" required>
+                    <option value="حارس">حارس</option>
+                    <option value="مدافع">مدافع</option>
+                    <option value="وسط">وسط</option>
+                    <option value="مهاجم">مهاجم</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="admin-form-actions">
+                <button id="savePlayerBtn" type="submit" class="admin-primary-btn">حفظ اللاعب</button>
+                <button id="cancelPlayerEditBtn" type="button" class="admin-secondary-btn hidden">إلغاء التعديل</button>
+              </div>
+
+              <p id="playerFormMessage" class="form-message"></p>
+            </form>
+
+            <div class="admin-list-preview">
+              <div class="list-preview-head">
+                <h3>اللاعبين المضافين</h3>
+                <span id="playersCountBadge">0 لاعب</span>
+              </div>
+
+              <div id="playersAdminList" class="admin-data-list">
+                <div class="preview-row">
+                  <strong>جاري تحميل اللاعبين...</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Matches -->
+        <section id="matches" class="admin-section">
+          <div class="admin-panel">
+            <div class="panel-title">
+              <h2>إدارة المباريات</h2>
+              <span>Matches</span>
+            </div>
+
+            <form id="matchForm" class="admin-form">
+              <input id="matchIdInput" type="hidden" />
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>الفريق الأول</label>
+                  <select id="matchHomeTeamInput" required>
+                    <option value="">جاري تحميل الفرق...</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>الفريق الثاني</label>
+                  <select id="matchAwayTeamInput" required>
+                    <option value="">جاري تحميل الفرق...</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>المرحلة</label>
+                  <select id="matchStageInput" required>
+                    <option value="group">المجموعات</option>
+                    <option value="quarter">ربع النهائي</option>
+                    <option value="semi">نصف النهائي</option>
+                    <option value="final">النهائي</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>المجموعة</label>
+                  <select id="matchGroupInput">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>خانة المخطط</label>
+                  <select id="matchBracketSlotInput">
+                    <option value="">بدون</option>
+                    <option value="QF1">QF1</option>
+                    <option value="QF2">QF2</option>
+                    <option value="QF3">QF3</option>
+                    <option value="QF4">QF4</option>
+                    <option value="SF1">SF1</option>
+                    <option value="SF2">SF2</option>
+                    <option value="FINAL">FINAL</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>التاريخ</label>
+                  <input id="matchDateInput" type="date" required />
+                </div>
+
+                <div class="form-group">
+                  <label>الوقت</label>
+                  <input id="matchTimeInput" type="time" required />
+                </div>
+
+                <div class="form-group">
+                  <label>الملعب</label>
+                  <input id="matchStadiumInput" type="text" placeholder="ملعب البطولة" />
+                </div>
+
+                <div class="form-group">
+                  <label>الحالة</label>
+                  <select id="matchStatusInput" required>
+                    <option value="upcoming">قادمة</option>
+                    <option value="today">اليوم</option>
+                    <option value="finished">منتهية</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="admin-form-actions">
+                <button id="saveMatchBtn" type="submit" class="admin-primary-btn">حفظ المباراة</button>
+                <button id="cancelMatchEditBtn" type="button" class="admin-secondary-btn hidden">إلغاء التعديل</button>
+              </div>
+
+              <p id="matchFormMessage" class="form-message"></p>
+            </form>
+
+            <div class="admin-list-preview">
+              <div class="list-preview-head">
+                <h3>المباريات المضافة</h3>
+                <span id="matchesCountBadge">0 مباراة</span>
+              </div>
+
+              <div id="matchesAdminList" class="admin-data-list">
+                <div class="preview-row">
+                  <strong>جاري تحميل المباريات...</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Results -->
+        <section id="results" class="admin-section">
+          <div class="admin-section-grid">
+
+            <div class="admin-panel">
+              <div class="panel-title">
+                <h2>نتيجة المباراة</h2>
+                <span>Score</span>
+              </div>
+
+              <form id="scoreForm" class="admin-form">
+                <div class="form-grid">
+                  <div class="form-group full-width">
+                    <label>اختيار المباراة</label>
+                    <select id="resultMatchSelect" required>
+                      <option value="">اختر المباراة</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>أهداف الفريق الأول</label>
+                    <input id="resultHomeScoreInput" type="number" min="0" placeholder="0" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label>أهداف الفريق الثاني</label>
+                    <input id="resultAwayScoreInput" type="number" min="0" placeholder="0" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label>حالة المباراة</label>
+                    <select id="resultStatusInput">
+                      <option value="finished">منتهية</option>
+                      <option value="today">اليوم</option>
+                      <option value="upcoming">قادمة</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button id="saveScoreBtn" type="submit" class="admin-primary-btn">حفظ النتيجة</button>
+                <p id="scoreFormMessage" class="form-message"></p>
+              </form>
+            </div>
+
+            <div class="admin-panel">
+              <div class="panel-title">
+                <h2>إضافة حدث</h2>
+                <span>Events</span>
+              </div>
+
+              <form id="eventForm" class="admin-form">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label>نوع الحدث</label>
+                    <select id="eventTypeInput" required>
+                      <option value="goal">هدف</option>
+                      <option value="yellow">بطاقة صفراء</option>
+                      <option value="red">بطاقة حمراء</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>الفريق</label>
+                    <select id="eventTeamInput" required>
+                      <option value="">اختر الفريق</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>اللاعب</label>
+                    <select id="eventPlayerInput" required>
+                      <option value="">اختر اللاعب</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button id="addEventBtn" type="submit" class="admin-secondary-btn">إضافة الحدث</button>
+                <p id="eventFormMessage" class="form-message"></p>
+              </form>
+
+              <div class="events-preview" id="resultEventsList">
+                <div class="event-chip">اختر مباراة لعرض أحداثها</div>
+              </div>
+            </div>
+
+            <div class="admin-panel">
+              <div class="panel-title">
+                <h2>أفضل لاعب</h2>
+                <span>MOTM</span>
+              </div>
+
+              <form id="motmForm" class="admin-form">
+                <div class="form-grid">
+                  <div class="form-group full-width">
+                    <label>اختيار أفضل لاعب بالمباراة</label>
+                    <select id="motmPlayerInput" required>
+                      <option value="">اختر اللاعب</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button id="saveMotmBtn" type="submit" class="admin-primary-btn">حفظ أفضل لاعب</button>
+                <p id="motmFormMessage" class="form-message"></p>
+              </form>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Lineups -->
+        <section id="lineups" class="admin-section">
+          <div class="admin-panel">
+            <div class="panel-title">
+              <h2>إدارة التشكيلات</h2>
+              <span>Lineups</span>
+            </div>
+
+            <div class="lineup-admin-warning">
+              اختر 8 لاعبين أساسيين فقط، وباقي لاعبي الفريق يتحولون إلى احتياط تلقائيًا.
+            </div>
+
+            <form id="lineupForm" class="admin-form">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>اختيار المباراة</label>
+                  <select id="lineupMatchSelect">
+                    <option value="">اختر المباراة</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>اختيار الفريق</label>
+                  <select id="lineupTeamSelect">
+                    <option value="">اختر الفريق</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>الخطة المتوقعة</label>
+                  <input id="lineupFormationPreview" type="text" value="0-0-0" disabled />
+                </div>
+              </div>
+
+              <div class="lineup-builder-layout single-lineup-layout">
+                <div class="lineup-builder-card">
+                  <div class="builder-head">
+                    <h3>الأساسيين</h3>
+                    <span id="startersCounter">0 / 8</span>
+                  </div>
+
+                  <div id="startersBuilder" class="lineup-player-rows"></div>
+                </div>
+
+                <div class="lineup-builder-card">
+                  <div class="builder-head">
+                    <h3>الاحتياط التلقائي</h3>
+                    <span id="subsCounter">0 لاعب</span>
+                  </div>
+
+                  <div id="autoSubsPreview" class="auto-subs-preview"></div>
+                </div>
+              </div>
+
+              <button id="saveLineupBtn" type="submit" class="admin-primary-btn">حفظ التشكيلة</button>
+              <p id="lineupFormMessage" class="form-message"></p>
+            </form>
+          </div>
+        </section>
+
+      </main>
+    </section>
+  </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const navButtons = document.querySelectorAll(".admin-nav-btn");
+    const sections = document.querySelectorAll(".admin-section");
+    const pageTitle = document.getElementById("adminPageTitle");
+
+    navButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = button.dataset.adminSection;
+
+        navButtons.forEach((btn) => btn.classList.remove("active"));
+        sections.forEach((section) => section.classList.remove("active-admin-section"));
+
+        button.classList.add("active");
+
+        const targetSection = document.getElementById(target);
+        if (targetSection) {
+          targetSection.classList.add("active-admin-section");
+        }
+
+        if (pageTitle) {
+          pageTitle.textContent = button.textContent.trim();
+        }
+      });
+    });
+  });
+</script>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
